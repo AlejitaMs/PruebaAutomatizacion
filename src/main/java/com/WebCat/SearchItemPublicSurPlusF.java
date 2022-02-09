@@ -9,13 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
 
 public class SearchItemPublicSurPlusF {
 
@@ -45,7 +41,6 @@ public class SearchItemPublicSurPlusF {
     public void SearchItemPublicSurPlus() {
         WebElement searchitem = driver.findElement(By.name("Submit4"));
         searchitem.click();
-        //searchitem.submit();
         WebElement input_keyword = driver.findElement(By.id("keyword"));
         input_keyword.sendKeys("#3");
         Select list_auctionends = new Select(driver.findElement(By.name("endHours")));
@@ -57,21 +52,15 @@ public class SearchItemPublicSurPlusF {
         input_priceup.clear();
         input_priceup.sendKeys("25");
         WebElement btn_search = driver.findElement(By.xpath("/html/body/div[2]/div[8]/form/div[8]/input"));
-        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
         btn_search.click();
-        btn_search.submit();
-       // WebDriverWait wait = new WebDriverWait(driver,10);
-        //thread.sleep(3000);
-       // wait.until(ExpectedConditions.titleContains("Public Surplus: Buscar una subasta"));
-       driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
-        assertEquals("Public Surplus: Buscar una subasta", driver.getTitle());
-
-
+        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MINUTES);
+        String table_results = driver.findElement(By.xpath("/html/body/div[2]/table")).getText();
+        System.out.println(table_results);
 
     }
 
     @After
-     public void Finish(){
+    public void Finish(){
         driver.quit();
 
     }
